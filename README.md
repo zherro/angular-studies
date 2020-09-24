@@ -8,6 +8,10 @@
 * [Configurações iniciais](#configurações-iniciais)
 	* [Animations](#animations)
 	* [Materialize](#materialize)
+* [Módulos e Componentes](#módulos-e-componentes)
+	* [Criando componente](#criando-componente)
+	* [Criando módulo](#criando-módulo)
+	* [Parâmetros](#parâmetros)
 * [Build](#build)
 
 ## Versions
@@ -69,6 +73,79 @@ export  class  AppModule { }
 			"node_modules/jquery/dist/jquery.min.js",
 			"node_modules/materialize-css/dist/js/materialize.min.js"
 		]
+```
+
+##  Módulos e Componentes
+
+Um componente reutilizável e acionada através do selector name, definido no próprio componente.
+
+	<app-componente-name></app-componente-name>
+
+### Criando componente
+```javascript
+// cria componente utilizando angular CLI
+ng generate component nomedocompomente
+```
+Para tornar o componente reutilizável, incluir a declaração do componente no arquivo `app.module.ts`:
+```javascript
+...
+@NgModule({
+	declarations: [
+	AppComponent,
+	// adiconar componente aqui, atentar para importação do componente
+	// a partir disso o componente ja pode ser utilizado através do seu selector
+],
+...
+```
+
+### Criando módulo
+Um modulo é um arquivo .ts  que agrupa e disponibiliza um ou mais componentes. 
+Exemplo de configuração do módulo `photos.module.ts`:
+```javascript
+import { NgModule } from  '@angular/core';
+import { PhotoComponent } from  './photo/photo.component';  // importação do componente
+
+@NgModule({
+	declarations: [ PhotoComponent ], // declaração do componete
+	exports: [ PhotoComponent ] // se o componente não for exportado não estará disponivel para utlilização
+})
+export  class  PhotosModule {}
+```
+
+Para declarar o modulo e disponibilizar os componentes para toda a aplicação, realizar import do módulo no arquivo `app.module.ts`:
+```javascript
+@NgModule({
+	declarations: [
+		AppComponent,
+	],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		PhotosModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
+})
+
+export  class  AppModule { }
+```
+
+###  Parâmetros
+Para adicionar parâmetros em um componente, utilizar o @Input()
+
+```javascript
+// no componente.ts
+import {  Input } from  '@angular/core';
+...
+@Input() description = "";
+@Input() url = "";
+... 
+
+// no component.html
+<img  [src]="url"  [alt]="description"  class="responsive-img"  >
+
+// utlização do componente 
+<app-photo [url]="./../../assets/imgs/imagem.jpge" [description]="Imgagem aleatória" ></app-photo>
 ```
 
 ## Development server

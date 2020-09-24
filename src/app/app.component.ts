@@ -7,6 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-studies';
-  url = "./../assets/imgs/download.jpg"
-  alt = "imagen";
+
+  photos = [
+    {url: './../assets/imgs/download (2).jpg', description: 'imagem teste'},
+    {url: './../assets/imgs/download (3).jpg', description: 'imagem teste'},
+    {url: './../assets/imgs/download (4).jpg', description: 'imagem teste'},
+    {url: './../assets/imgs/download (6).jpg', description: 'imagem teste'},
+    {url: './../assets/imgs/download (5).jpg', description: 'imagem teste'},
+  ]
+
 }

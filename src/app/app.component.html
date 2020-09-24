@@ -3,7 +3,12 @@
     <div class="col s12">
       <h1>{{ title }}</h1>
 
-      <img [src]="url" [alt]="title" class="responsive-img" >
+      <app-photo   
+        *ngFor="let p of photos"
+        [url]="p.url"
+        [description]="p.description"
+      ></app-photo>
+
     </div>
   </div>
 </div>
