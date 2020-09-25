@@ -12,6 +12,11 @@
 	* [Criando componente](#criando-componente)
 	* [Criando módulo](#criando-módulo)
 	* [Parâmetros](#parâmetros)
+* [Rotas](#rotas)
+	* [Parâmetros Dinâmicos](#parâmetros-dinâmicos)
+* [HttpClient - consumo de api](#httpclient---consumo-de-api)
+	* [Consumindo uma API](#consumindo-uma-api)
+	* [Consumindo Service API](#consumindo-service-api)
 * [Build](#build)
 
 ## Versions
@@ -146,6 +151,129 @@ import {  Input } from  '@angular/core';
 
 // utlização do componente 
 <app-photo [url]="./../../assets/imgs/imagem.jpge" [description]="Imgagem aleatória" ></app-photo>
+```
+
+## Rotas
+> Criar arquivo `app-routing.module.ts` na pasta `./src/app`
+
+```javascript
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+// componente customizado
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+
+const routes = [
+  { path: 'url/exemplo', component:ExampleComponent }, 
+  { path: '**', component: NotFoundComponent } // not found - 404
+];
+
+@NgModule({
+  declarations: [],
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes) // importante
+  ],
+  exports: [
+    RouterModule // importante para que o appModule obtenha as rotas
+  ]
+})
+export class AppRoutingModule { }
+```
+
+> no arquivo `app.module.ts`, realizar import do nosso componente de rotas.
+
+```javascript
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,  // <------
+
+	...
+	
+    ErrorsModule
+  ],
+```
+
+### Parâmetros Dinâmicos
+> Para adicionar paramentros as rotas, utilizar `/:paranName`
+
+```javascript
+...
+const routes = [
+  { path: 'minha-url/:paran1/:paran2', component: ExampleComponent },  // representa: minha-url/qualquer/coisa
+  ...
+  { path: '**', component: NotFoundComponent }
+];
+...
+```
+> Para capturar os valores passado no controler do componente utilizar o modulo `ActivatedRoute`.
+
+```javascript
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+...
+export class ExampleComponent implements OnInit {
+
+  constructor( private route: ActivatedRoute  ) { }
+
+  ngOnInit(): void {
+    const paran1 = this.route.snapshot.params.paran1;
+    const paran2 = this.route.snapshot.params.paran2;
+  }
+}
+```
+
+
+##  HttpClient - consumo de api
+O modulo pode ser importado no `app.modules.ts`, assim estará disponível em toda a aplicação.
+> Uma boa pratica é importar o o modulo `HttpClientModule` diretamente no módulo customizado e não de forma global
+```javascript
+import { HttpClientModule } from  '@angular/common/http';
+...
+imports: [
+	HttpClientModule,
+	CommonModule
+]
+...
+```
+### Consumindo uma API
+Exemplo de um arquivo `.service.ts`
+```javascript
+import { HttpClient } from  '@angular/common/http';
+import { Injectable } from  '@angular/core';  
+
+const API = '';
+
+@Injectable({ providedIn:  'root' })	// para que o serrviço possa ser injetado em outros componentes
+export  class  ExampleService{ 
+
+	constructor(private  http: HttpClient){}
+	  
+	list(){
+		// para especificar o tipo de retorno com uma interface
+		// subistir o Object[] por SuaIterface[]
+		return this.http.get<Object[]>(API+ '/all');
+	}
+}
+```
+
+### Consumindo Service API
+```javascript
+export  class  ExampleListComponent{
+	data: any[] = [];
+	
+	constructor(
+		private  service: ExampleService
+	) { }
+
+	all(){
+		this.photoService
+			.list()
+			.subscribe(data =>  this.data = data);
+	}
+}
 ```
 
 ## Development server
