@@ -17,6 +17,7 @@
 * [HttpClient - consumo de api](#httpclient---consumo-de-api)
 	* [Consumindo uma API](#consumindo-uma-api)
 	* [Consumindo Service API](#consumindo-service-api)
+* [SimpleChanges in ngOnChange function](#simpleChanges-in-ngonchange-function)
 * [Build](#build)
 
 ## Versions
@@ -275,6 +276,43 @@ export  class  ExampleListComponent{
 	}
 }
 ```
+
+## SimpleChanges in ngOnChange function
+
+> Isso resolve um problema gerado quando a uma requisição asincrona a ser processada
+
+**SimpleChanges** é um recurso Angular / Core que pode ser usado para ver as mudanças e mais alguns detalhes dos nomes das propriedades declaradas em um componente. E também precisa ser usado nomé todoAngular **ngOnChange** para ver as mudanças de valores e fazer coisas relevantes.
+
+Simplesmente o **ngOnChange** é disparado quando os valores das propriedades declaradas são alterados. Portanto, nesse método, podemos definir isso como um parâmetro para armazenar os dados. como isso:
+
+```javascript
+...
+ngOnChanges(changes: SimpleChanges) {
+...
+```
+
+> Um exemplo mais funcional. Quando o [@Input](#parâmetros) for alterado, o `ngOnChange` sera acionado:
+
+> > Note que foi implentanda a interface `OnChanges`
+
+```javascript
+import { SimpleChanges } from '@angular/core';
+...
+export class ExampleOtherComponent implements OnChanges {
+
+  @Input() paran: any[] = [];
+
+  constructor() { }
+
+  ngOnChanges(changes: SimpleChanges) {
+      if(changes.paran) {
+		// actions here
+        ...
+      }
+  }
+```
+
+
 
 ## Development server
 

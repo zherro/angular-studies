@@ -1,0 +1,12 @@
+<div class="container">
+    <div *ngFor="let row of rows" class="row">
+      <div *ngFor="let p of row" class="col s4">
+
+        <app-photo          
+          [url]="p.url"
+          [description]="p.description"
+        ></app-photo>
+
+      </div>
+    </div>
+  </div>
