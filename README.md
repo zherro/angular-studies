@@ -18,6 +18,9 @@
 	* [Consumindo uma API](#consumindo-uma-api)
 	* [Consumindo Service API](#consumindo-service-api)
 * [SimpleChanges in ngOnChange function](#simpleChanges-in-ngonchange-function)
+* [target event](#target-event)
+* [Trasform data com pipe](#trasform-data-com-pipe)
+* [Resolver](#resolver)
 * [Build](#build)
 
 ## Versions
@@ -343,7 +346,7 @@ Transformadores que poden ser utilizados em `ng expressions`
 
 Ainda é possivel definir um transformador customizado:
 
-```javascript
+> deve ser declarado no modulo na sessão `declarations`
 
 // src/app/exponential-strength.pipe.ts
 
@@ -380,6 +383,72 @@ import { Component } from '@angular/core';
 })
 export class PowerBoosterComponent { }
 ```
+
+## Resolver
+
+Interface que as classes podem implementar para ser um provedor de dados. Uma classe de provedor de dados pode ser usada com o roteador para resolver os dados durante a navegação. A interface define um resolve()método que é chamado quando a navegação é iniciada. O roteador espera que os dados sejam resolvidos antes que a rota seja finalmente ativada.
+traduzido.
+
+> 
+
+```javascript
+interface Resolve<T> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<T> | Promise<T> | T
+}
+```
+
+### Implemenação
+
+```javascript
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
+
+...
+// File example.resolve.ts
+
+@Injectable({ providedIn: 'root' })
+export class ExampleResolver implements Resolve<Observable<Object[]>>{
+
+    constructor(private service: ExampleService) {}
+
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Object[]> {
+        ...
+
+        return ...;
+    }
+}
+```
+
+```javascript
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+...
+export class ExampleComponent implements OnInit {
+
+...
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+	// this.route.snapshot.data...  <<--
+    this.photos = this.route.snapshot.data.photos;
+  }
+}
+```
+
+```javascript
+...
+const routes = [
+  {
+    path: 'my-url/:paran1', component: ExampleComponent,
+    resolve: {
+      photos: ExampleResolver
+    }
+  },
+ ...
+];
+```
+
 
 ## Development server
 
