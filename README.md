@@ -279,8 +279,6 @@ export  class  ExampleListComponent{
 
 ## SimpleChanges in ngOnChange function
 
-> Isso resolve um problema gerado quando um atributo depende de uma requisição asincrona.
-
 **SimpleChanges** é um recurso Angular / Core que pode ser usado para ver as mudanças e mais alguns detalhes dos nomes das propriedades declaradas em um componente. E também precisa ser usado nomé todoAngular **ngOnChange** para ver as mudanças de valores e fazer coisas relevantes.
 
 Simplesmente o **ngOnChange** é disparado quando os valores das propriedades declaradas são alterados. Portanto, nesse método, podemos definir isso como um parâmetro para armazenar os dados. como isso:
@@ -312,7 +310,76 @@ export class ExampleOtherComponent implements OnChanges {
   }
 ```
 
+## target event 
 
+Para capturar ventos de compoentes html
+
+> [Angular Events](https://angular.io/guide/event-binding)
+
+```html
+<input type="text"
+       (input)="currentItem.name = $event.target.value"
+        >
+
+<input 
+        type="text"
+        (keyup)="filter = $event.target.value"
+        >
+```
+
+## Trasform data com pipe
+
+Transformadores que poden ser utilizados em `ng expressions`
+
+> [Transforming Data Using Pipes](https://angular.io/guide/pipes)
+
+```html
+<p>The hero's birthday is {{ birthday | date }}</p>
+...
+<p>The hero's birthday is {{ birthday | date:"MM/dd/yy" }} </p>
+...
+{{ birthday | date | uppercase}}
+```
+
+Ainda é possivel definir um transformador customizado:
+
+```javascript
+
+// src/app/exponential-strength.pipe.ts
+
+import { Pipe, PipeTransform } from '@angular/core';
+/*
+ * Raise the value exponentially
+ * Takes an exponent argument that defaults to 1.
+ * Usage:
+ *   value | exponentialStrength:exponent
+ * Example:
+ *   {{ 2 | exponentialStrength:10 }}
+ *   formats to: 1024
+*/
+@Pipe({name: 'exponentialStrength'})
+export class ExponentialStrengthPipe implements PipeTransform {
+  transform(value: number, exponent?: number): number {
+    return Math.pow(value, isNaN(exponent) ? 1 : exponent);
+  }
+}
+```
+
+```javascript
+
+// src/app/power-booster.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-power-booster',
+  template: `
+    <h2>Power Booster</h2>
+    <p>Super power boost: {{2 | exponentialStrength: 10}}</p>
+  `
+})
+export class PowerBoosterComponent { }
+```
 
 ## Development server
 
