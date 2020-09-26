@@ -1,0 +1,30 @@
+.input-box {
+    border: 1px solid #26a69a;
+}
+
+.input-box>input[type=text]:not(.browser-default){
+    border-bottom: none;
+    margin: 8px 0 0 0;
+}
+
+.input-box>input[type=text]:not(.browser-default):focus:not([readonly]){
+    border-bottom: none;
+    box-shadow: inherit;
+}
+
+.input-box>label{
+    top: 5px;
+}
+
+.input-box>label.active{
+    top: 15px;
+}
+
+.rounded5{
+    border-radius: 5px;
+}
+
+.center-box{
+    margin: 0 auto;
+    float: none;
+}

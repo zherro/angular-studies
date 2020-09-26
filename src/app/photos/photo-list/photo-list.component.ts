@@ -9,6 +9,7 @@ import { PhotoService } from '../photo/photo.service';
 })
 export class PhotoListComponent implements OnInit {
 
+  filter: string = '';
   photos: any[] = [
     // {url: './../assets/imgs/download (2).jpg', description: 'imagem teste'},
   ];

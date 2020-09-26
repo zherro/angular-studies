@@ -1,0 +1,3 @@
+[submodule "src/assets/style-pack"]
+	path = src/assets/style-pack
+	url = https://github.com/zherro/style-pack.git

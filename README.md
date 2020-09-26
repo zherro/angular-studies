@@ -279,7 +279,7 @@ export  class  ExampleListComponent{
 
 ## SimpleChanges in ngOnChange function
 
-> Isso resolve um problema gerado quando a uma requisição asincrona a ser processada
+> Isso resolve um problema gerado quando um atributo depende de uma requisição asincrona.
 
 **SimpleChanges** é um recurso Angular / Core que pode ser usado para ver as mudanças e mais alguns detalhes dos nomes das propriedades declaradas em um componente. E também precisa ser usado nomé todoAngular **ngOnChange** para ver as mudanças de valores e fazer coisas relevantes.
 
