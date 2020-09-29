@@ -4,9 +4,17 @@
 <div class="container">
   <div *ngFor="let row of rows" class="row">
     <div *ngFor="let p of row" class="col s4">
+      <div class="card">
+        <app-card [title]="p.description">
+          <div image>
+            <app-photo [url]="p.url" [description]="p.description"></app-photo>
+          </div>
+          <div action>
+            <i class="fa fa-heart-o fa-1x m-xxs"></i>{{ p.likes }}
+            <i class="fa fa-comments-o fa-1x m-xxs"></i>{{ p.comments }}
+          </div>
+        </app-card>
 
-      <app-photo [url]="p.url" [description]="p.description"></app-photo>
-
+      </div>
     </div>
   </div>
-</div>

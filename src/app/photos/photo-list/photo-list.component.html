@@ -1,15 +1,5 @@
-<div class="container mt-m">
-  <div class="row">
-    <div class="input-field input-box col s5 center-box">
-      <input 
-        id="input_text" 
-        type="text" 
-        data-length="10"
-        autofocus
-        (keyup)="filter = $event.target.value"
-        >
-      <label for="input_text">Pesquisar</label>
-    </div>
-  </div>
-</div>
+<app-search (onTyping)="filter = $event" [value]="filter"></app-search>
+
 <app-photos [photos]="photos | filterByDescription : filter"></app-photos>
+
+<app-load-button [hasMore]="hasMore" (click)="load()"></app-load-button>

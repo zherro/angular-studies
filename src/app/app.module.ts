@@ -9,13 +9,13 @@ import { ErrorsModule } from './errors/errors.module';
 
 @NgModule({
   declarations: [
-    AppComponent    
+    AppComponent 
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-
+    
     PhotosModule,
     ErrorsModule
   ],

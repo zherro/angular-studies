@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+
+            <div class="center" *ngIf="hasMore; else messageTemplate">
+                <button class="btn btn-flat cyan lighten-3">Mais...</button>
+            </div>
+            <ng-template #messageTemplate>
+                <p class="center flow-text">No more data to load!</p>
+            </ng-template>
+
+        </div>
+    </div>
+</div>

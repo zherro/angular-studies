@@ -1,0 +1,15 @@
+<div class="container mt-m">
+    <div class="row">
+      <div class="input-field input-box col s5 center-box">
+        <input 
+          id="input_text" 
+          type="text" 
+          data-length="10"
+          autofocus
+          (keyup)="debounce.next($event.target.value)"
+          [value]="value"
+          >
+        <label for="input_text">Pesquisar</label>
+      </div>
+    </div>
+  </div>

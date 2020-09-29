@@ -24,8 +24,8 @@
 * [Build](#build)
 
 ## Versions
- - [Angular 8.3.12](https://angular.io/)
- - [Materialize ^6.1.3](https://materializecss.com/)
+ - [Angular 8.3.12](https://angular.io/){:target="_blank"}
+ - [Materialize ^6.1.3](https://materializecss.com/){:target="_blank"}
 
 ## Configurações iniciais
 
@@ -317,7 +317,7 @@ export class ExampleOtherComponent implements OnChanges {
 
 Para capturar ventos de compoentes html
 
-> [Angular Events](https://angular.io/guide/event-binding)
+> [Angular Events](https://angular.io/guide/event-binding){:target="_blank"}
 
 ```html
 <input type="text"
@@ -334,7 +334,7 @@ Para capturar ventos de compoentes html
 
 Transformadores que poden ser utilizados em `ng expressions`
 
-> [Transforming Data Using Pipes](https://angular.io/guide/pipes)
+> [Transforming Data Using Pipes](https://angular.io/guide/pipes){:target="_blank"}
 
 ```html
 <p>The hero's birthday is {{ birthday | date }}</p>
@@ -348,6 +348,7 @@ Ainda é possivel definir um transformador customizado:
 
 > deve ser declarado no modulo na sessão `declarations`
 
+```javascript
 // src/app/exponential-strength.pipe.ts
 
 import { Pipe, PipeTransform } from '@angular/core';
@@ -387,7 +388,7 @@ export class PowerBoosterComponent { }
 ## Resolver
 
 Interface que as classes podem implementar para ser um provedor de dados. Uma classe de provedor de dados pode ser usada com o roteador para resolver os dados durante a navegação. A interface define um resolve()método que é chamado quando a navegação é iniciada. O roteador espera que os dados sejam resolvidos antes que a rota seja finalmente ativada.
-traduzido.
+['traduzido']
 
 > 
 
@@ -398,6 +399,8 @@ interface Resolve<T> {
 ```
 
 ### Implemenação
+
+> Um exemplo de utilização, é para casos onde a página deve aguardar a consulta de um serviço
 
 ```javascript
 import { Injectable } from '@angular/core';
@@ -448,6 +451,72 @@ const routes = [
  ...
 ];
 ```
+
+
+## Comunicação entre compoentes
+
+A comunicação pode ser realizada através de um custom event.
+
+> Exemplo de u comente de pesquisa 
+
+```javascript
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime, filter } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
+})
+export class SearchComponent implements OnInit, OnDestroy {
+
+  // evento customizado
+  @Output() onTyping = new EventEmitter<string>();
+  
+  @Input() value:string ='';
+  debounce: Subject<string> = new Subject<string>();
+
+  constructor() { }
+
+  ngOnInit() {
+    this.debounce
+      .pipe(debounceTime(300)) // quando parar de digitar po 300ms aciona o subscribe
+      .subscribe(filter => this.onTyping.emit(filter));
+  }
+  
+  ngOnDestroy(): void {
+    this.debounce.unsubscribe();
+  }
+}
+```
+
+```html
+<div class="container mt-m">
+    <div class="row">
+      <div class="input-field input-box col s5 center-box">
+        <input 
+          id="input_text" 
+          type="text" 
+          data-length="10"
+          autofocus
+          (keyup)="debounce.next($event.target.value)"
+          [value]="value"
+          >
+        <label for="input_text">Pesquisar</label>
+      </div>
+    </div>
+  </div>
+```
+
+> O evento customizado `onTyping` estará assistindo o compenten e informando as transições de estado. 
+> 
+
+```html
+<!-- utlizacao do componete -->
+<app-search (onTyping)="filter = $event" [value]="filter"></app-search>
+```
+
 
 
 ## Development server
