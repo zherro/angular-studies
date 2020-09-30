@@ -11,6 +11,7 @@ import { LoadButtonComponent } from './photo-list/load-button/load-button.compon
 import { CardComponent } from '../shared/componets/card/card/card.component';
 import { CardModule } from '../shared/componets/card/card/card.module';
 import { SearchComponent } from './photo-list/search/search.component';
+import { DarkenOnHoverModule } from '../shared/componets/directives/darken-on-hover/darken-on-hover.modeule';
 
 @NgModule({
     declarations: [ 
@@ -29,7 +30,8 @@ import { SearchComponent } from './photo-list/search/search.component';
         HttpClientModule, 
         CommonModule,
 
-        CardModule
+        CardModule,
+        DarkenOnHoverModule
     ]
 })
 export class PhotosModule {}
