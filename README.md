@@ -564,6 +564,28 @@ Utilizando a diretiva
 <div class="card" appDarkenOnHover brightness="80%">
 ```
 
+## Detectando a plataforma de execução
+
+Ao chamar o método `isPlatformBrowser` sera retornando true se estivere sendo executado em um navegador.
+
+```javascript
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+
+// metodo para detecção de plataforma
+import { isPlatformBrowser } from '@angular/common';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PlataformDetectorService {
+
+  constructor(@Inject(PLATFORM_ID) private plataforID: string) { }
+
+  isPlatformBrowser(){
+    return isPlatformBrowser(this.plataforID);
+  }
+}
+```
 
 ## Development server
 
