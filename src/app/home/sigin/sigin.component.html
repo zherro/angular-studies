@@ -1,0 +1,32 @@
+<div class="row">
+    <h4 class="center">Login</h4>
+    <form 
+        (submit)="login()"
+        [formGroup]="loginForm" 
+        class="col s4" 
+        style="margin: 0 auto;float: inherit;"
+    >
+        <div class="row">
+            <div class="input-field col s12">
+                <input 
+                    #userNameImput
+                    type="text" 
+                    formControlName="userName" 
+                >
+                <label for="first_name">First Name</label>
+                <app-vmessage 
+                    text="Informe seu login!"
+                    *ngIf="loginForm.get('userName').errors?.required"
+                ></app-vmessage>
+            </div>
+            <div class="input-field col s12">
+                <input  type="password" formControlName="password">
+                <label for="last_name">Last Name</label>
+                <app-vmessage *ngIf="loginForm.get('userName').errors?.required"></app-vmessage>
+            </div>
+            <div class="col s12">
+                <button [disabled]="loginForm.invalid" class="btn-flat cyan lighten-3">Entar</button>
+            </div>
+        </div>
+    </form>
+</div>
