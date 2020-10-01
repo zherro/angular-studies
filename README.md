@@ -587,6 +587,61 @@ export class PlataformDetectorService {
 }
 ```
 
+## JWT decode
+
+Para realizar decode de um token JWT
+
+```
+# instalar pacote
+
+npm install jwt-decode
+```
+
+### Utlização
+
+```javascript
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { TokenService } from '../toke/token.service';
+import jwt_decode from 'jwt-decode';
+import { User } from './user';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService {
+
+
+  // sempre utilizar o BehaviorSubject para quando um serviço é carrega antes do componente
+  private userSubject = new BehaviorSubject<User>(null);
+
+  constructor(private tokeService: TokenService) {
+
+    this.tokeService.hasToken() &&
+      this.decodeAndNotfy();
+  }
+
+  setToken(token: string) {
+    this.tokeService.setToken(token);
+    this.decodeAndNotfy();
+  }
+
+  getUser() {
+    // retorn um observable para dar subscribe
+    return this.userSubject.asObservable();
+  }
+
+  private decodeAndNotfy() {
+    const token = this.tokeService.getToken();
+
+    // decode do token
+    const user = jwt_decode(token) as User;
+    this.userSubject.next(user);
+  }
+}
+```
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
