@@ -1,0 +1,76 @@
+<div class="container">
+    <h4 class="center">Register to embrace a new world!</h4>
+    
+    <form class="form mt-s" [formGroup]="signupForm">
+        <div class="row">
+            <div class="input-field col s6">
+                <input formControlName="email" id="email" type="email" class="validate">
+                <label for="email">Email</label>
+                <app-vmessage 
+                    text="Informe seu email!"
+                    *ngIf="signupForm.get('email').errors?.required"
+                ></app-vmessage>
+                <app-vmessage 
+                    text="Email invalido"
+                    *ngIf="signupForm.get('email').errors?.email"
+            ></app-vmessage>
+            </div>
+            <div class="input-field col s6">
+                <input formControlName="fullName" id="full-name" type="text" class="validate">
+                <label for="full-name">Full name</label>
+                <app-vmessage 
+                    text="Campo obrigatório!"
+                    *ngIf="signupForm.get('fullName').errors?.required"
+                ></app-vmessage>
+                <app-vmessage 
+                    text="No minimo 2 caracteres"
+                    *ngIf="signupForm.get('fullName').errors?.minlength"
+                ></app-vmessage>
+                <app-vmessage 
+                    text="No maximo 40 caracteres"
+                    *ngIf="signupForm.get('fullName').errors?.maxlength"
+                ></app-vmessage>
+            </div>
+            <div class="input-field col s6">
+                <input formControlName="userName" id="user-name" type="text" class="validate">
+                <label for="user-name">User name</label>                
+                <app-vmessage 
+                    text="Campo obrigatorio"
+                    *ngIf="signupForm.get('userName').errors?.required"
+                ></app-vmessage>              
+                <app-vmessage 
+                    text="No minimo 2 caracteres"
+                    *ngIf="signupForm.get('userName').errors?.minlength"
+                ></app-vmessage>
+                <app-vmessage 
+                    text="No maximo 30 caracteres"
+                    *ngIf="signupForm.get('userName').errors?.maxlength"
+                ></app-vmessage>
+                <app-vmessage 
+                    text="deve contar apenas numeros e letras (a-z e 0-9)!"
+                    *ngIf="signupForm.get('userName').errors?.pattern"
+                ></app-vmessage>
+            </div>
+            <div class="input-field col s6">
+                <input formControlName="password" id="password" type="password" class="validate">
+                <label for="password">Password</label>
+                <app-vmessage 
+                    text="Campo obrigatorio"
+                    *ngIf="signupForm.get('password').errors?.required"
+                ></app-vmessage>              
+                <app-vmessage 
+                    text="No minimo 8 caracteres"
+                    *ngIf="signupForm.get('password').errors?.minlength"
+                ></app-vmessage>
+                <app-vmessage 
+                    text="No maximo 14 caracteres"
+                    *ngIf="signupForm.get('password').errors?.maxlength"
+                ></app-vmessage>
+            </div>
+            <div class="col s12">
+                <button class="btn blue right">Register</button>
+            </div>
+            <p class="center">Already a user? <a [routerLink]="['']">Sign In!</a></p>
+        </div>
+    </form>
+</div>
