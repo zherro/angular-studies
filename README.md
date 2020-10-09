@@ -84,6 +84,24 @@ export  class  AppModule { }
 		]
 ```
 
+## font-awesome
+
+Adicionar pacote ao projeto
+
+```
+$ npm install font-awesome
+```
+
+Em seguida adicionar ao `angular.json`
+
+```javascript
+"styles": [
+    "src/styles.css",
+    "node_modules/font-awesome/css/font-awesome.css",
+    ...
+  ],
+```
+
 ##  Módulos e Componentes
 
 Um componente reutilizável e acionada através do selector name, definido no próprio componente.
@@ -229,6 +247,51 @@ export class ExampleComponent implements OnInit {
 }
 ```
 
+## Proteção de Rotas (AuthGuard)
+
+Criar um arquivo de configuração de guarda, nesse exemplo `auth.guard.ts`
+
+```javascript
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { UserService } from '../user/user.service';
+
+// para que possa ser injetado por toda a aplicação
+@Injectable({providedIn: 'root'})
+export class AuthGuard implements CanActivate {
+    
+    constructor(
+        private userSevice: UserService,
+        private router: Router) {
+
+    }
+
+    // methodo da interface 'CanActivate'
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        // implementação para fintro de acesso a rota
+        if(this.userSevice.isLogged()){
+            this.router.navigate(['user', this.userSevice.getUserName()])
+            return false;
+        }
+        return true;
+    }    
+}
+```
+
+> a utilização é definida por configuração no arquivo `app-routing.modules.ts`, por meio do atributo `canActivate: [...]`, podendo ser passado mais de um guard como parametro
+
+```javascript
+...
+const routes = [  
+  { path: '', component: SiginComponent, canActivate: [AuthGuard] },
+  ...
+];
+
+@NgModule({
+  ...
+})
+export class AppRoutingModule { }
+```
 
 ##  HttpClient - consumo de api
 O modulo pode ser importado no `app.modules.ts`, assim estará disponível em toda a aplicação.
