@@ -48,8 +48,13 @@
                 ></app-vmessage>
                 <app-vmessage 
                     text="deve contar apenas numeros e letras (a-z e 0-9)!"
-                    *ngIf="signupForm.get('userName').errors?.pattern"
+                    *ngIf="signupForm.get('userName').errors?.lowerCase"
                 ></app-vmessage>
+                <app-vmessage 
+                    text="Nome de usuário ja existe"
+                    *ngIf="signupForm.get('userName').errors?.userNameTaken"
+                ></app-vmessage>
+                <small *ngIf="signupForm.get('userName').valid" class="green-text">Nome de usuário disponivel!</small>
             </div>
             <div class="input-field col s6">
                 <input formControlName="password" id="password" type="password" class="validate">
@@ -68,7 +73,7 @@
                 ></app-vmessage>
             </div>
             <div class="col s12">
-                <button class="btn blue right">Register</button>
+                <button [disabled]="signupForm.invalid || signupForm.pending" class="btn blue right">Register</button>
             </div>
             <p class="center">Already a user? <a [routerLink]="['']">Sign In!</a></p>
         </div>
