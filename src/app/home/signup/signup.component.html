@@ -1,7 +1,7 @@
 <div class="container">
     <h4 class="center">Register to embrace a new world!</h4>
     
-    <form class="form mt-s" [formGroup]="signupForm">
+    <form class="form mt-s" [formGroup]="signupForm" (submit)="signup()">
         <div class="row">
             <div class="input-field col s6">
                 <input formControlName="email" id="email" type="email" class="validate">

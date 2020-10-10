@@ -2,34 +2,48 @@
 # AngularStudies
 > Projeto para aplicação de conhecimentos
 
-## Table of Contents
+## Menu
 
 * [Versions](#versions)
-* [Configurações iniciais](#configurações-iniciais)
-	* [Animations](#animations)
-	* [Materialize](#materialize)
-* [Módulos e Componentes](#módulos-e-componentes)
-	* [Criando componente](#criando-componente)
-	* [Criando módulo](#criando-módulo)
-	* [Parâmetros](#parâmetros)
-* [Rotas](#rotas)
-	* [Parâmetros Dinâmicos](#parâmetros-dinâmicos)
-* [HttpClient - consumo de api](#httpclient---consumo-de-api)
-	* [Consumindo uma API](#consumindo-uma-api)
-	* [Consumindo Service API](#consumindo-service-api)
-* [SimpleChanges in ngOnChange function](#simpleChanges-in-ngonchange-function)
-* [target event](#target-event)
-* [Trasform data com pipe](#trasform-data-com-pipe)
-* [Resolver](#resolver)
-* [Build](#build)
+* [Configurações iniciais](#configurações-iniciais-&#8673;)
+	* [Animations](#animations-&#8673;)
+	* [Materialize](#materialize-&#8673;)
+  * [font-awesome](#font-awesome-&#8673;)
+* [Módulos e Componentes](#módulos-e-componentes-&#8673;)
+	* [Criando componente](#criando-componente-&#8673;)
+	* [Criando módulo](#criando-módulo-&#8673;)
+	* [Parâmetros](#parâmetros-&#8673;)
+* [Subject e BehaviorSubject](#subject-e-behaviorsubject-&#8673;)
+* [Rotas](#rotas-&#8673;)
+	* [Parâmetros Dinâmicos](#parâmetros-dinâmicos-&#8673;)
+  * [Proteção de Rotas (AuthGuard)](#proteção-de-rotas-authguard-&#8673;)
+* [HttpClient - consumo de api](#httpclient---consumo-de-api-&#8673;)
+	* [Consumindo uma API](#consumindo-uma-api-&#8673;)
+	* [Consumindo Service API](#consumindo-service-api-&#8673;)
+* [SimpleChanges in ngOnChange function](#simpleChanges-in-ngonchange-function-&#8673;)
+* [target event](#target-event-&#8673;)
+* [Data Trasform com pipe](#data-trasform-com-pipe-&#8673;)
+  * [Custom pipe](#custom-pipe-&#8673;)
+* [Resolver](#resolver-&#8673;)
+  * [Implemenação](#implemenação-&#8673;)
+* [Comunicação entre compoentes](#comunicação-entre-compoentes-&#8673;)
+* [Diretivas](#diretivas-&#8673;) 
+* [Detectando a plataforma de execução](#detectando-a-plataforma-de-execução-&#8673;)
+* [JWT decode](#jwt-decode-&#8673;)
+  * [Utlização](#utlização-&#8673;)
+* [Angular Forms](#angular-forms-&#8673;)
+  * [Validators](#validators-&#8673;)
+  * [Custom validators](#custom-validators-&#8673;)
+  * [Custom validator service](#custom-validator-service-&#8673;)
+* [Build](#build-&#8673;)
 
 ## Versions
  - [Angular 8.3.12](https://angular.io/){:target="_blank"}
  - [Materialize ^6.1.3](https://materializecss.com/){:target="_blank"}
 
-## Configurações iniciais
+## Configurações iniciais [&#8673;](#menu)
 
-### Animations
+### Animations [&#8673;](#menu)
 
 > Você usa animações adicionando-as a cada módulo que deseja que sejam usados. Se você deseja que eles sejam usados ​​em todo o seu aplicativo, você pode adicioná-los ao seu `app.module.ts` arquivo assim:
 ```cmd
@@ -59,7 +73,7 @@ import { BrowserAnimationsModule } from  '@angular/platform-browser/animations';
 export  class  AppModule { }
 ```
 
-### Materialize
+### Materialize [&#8673;](#menu)
 
 > Criado e projetado pelo Google, o Material Design é uma linguagem de design que combina os princípios clássicos do design de sucesso com inovação e tecnologia. 
 
@@ -84,7 +98,7 @@ export  class  AppModule { }
 		]
 ```
 
-## font-awesome
+## font-awesome [&#8673;](#menu)
 
 Adicionar pacote ao projeto
 
@@ -102,13 +116,13 @@ Em seguida adicionar ao `angular.json`
   ],
 ```
 
-##  Módulos e Componentes
+##  Módulos e Componentes  [&#8673;](#menu)
 
 Um componente reutilizável e acionada através do selector name, definido no próprio componente.
 
 	<app-componente-name></app-componente-name>
 
-### Criando componente
+### Criando componente [&#8673;](#menu)
 ```javascript
 // cria componente utilizando angular CLI
 ng generate component nomedocompomente
@@ -125,9 +139,13 @@ Para tornar o componente reutilizável, incluir a declaração do componente no 
 ...
 ```
 
-### Criando módulo
+### Criando módulo [&#8673;](#menu)
 Um modulo é um arquivo .ts  que agrupa e disponibiliza um ou mais componentes. 
 Exemplo de configuração do módulo `photos.module.ts`:
+
+> IMPORTANTE: o módulo sempre deve importar as dependendias de seus componentes.
+> Um componente comum é o `CommomModules`, módulo que fornece diretivas base com `ngIf`, `ngFor` e binds do angular.
+
 ```javascript
 import { NgModule } from  '@angular/core';
 import { PhotoComponent } from  './photo/photo.component';  // importação do componente
@@ -157,7 +175,7 @@ Para declarar o modulo e disponibilizar os componentes para toda a aplicação, 
 export  class  AppModule { }
 ```
 
-###  Parâmetros
+###  Parâmetros [&#8673;](#menu)
 Para adicionar parâmetros em um componente, utilizar o @Input()
 
 ```javascript
@@ -174,8 +192,15 @@ import {  Input } from  '@angular/core';
 // utlização do componente 
 <app-photo [url]="./../../assets/imgs/imagem.jpge" [description]="Imgagem aleatória" ></app-photo>
 ```
+## Subject e BehaviorSubject [&#8673;](#menu)
 
-## Rotas
+`BehaviorSubject` é um tipo de subject, um subject é um tipo especial de observable para que você possa assinar mensagens como qualquer outro observable. Os recursos exclusivos do BehaviorSubject são:
+
+* Ele precisa de um valor inicial, pois sempre deve retornar um valor na assinatura, mesmo que não tenha recebido um `next()`
+* Na assinatura, ele retorna o último valor do assunto. Um observável regular apenas dispara quando recebe um `onnext`
+* a qualquer momento, você pode recuperar o último valor do assunto em um código não observável usando o método `getValue()`
+
+## Rotas [&#8673;](#menu)
 > Criar arquivo `app-routing.module.ts` na pasta `./src/app`
 
 ```javascript
@@ -218,7 +243,7 @@ export class AppRoutingModule { }
   ],
 ```
 
-### Parâmetros Dinâmicos
+### Parâmetros Dinâmicos  [&#8673;](#menu)
 > Para adicionar paramentros as rotas, utilizar `/:paranName`
 
 ```javascript
@@ -247,7 +272,7 @@ export class ExampleComponent implements OnInit {
 }
 ```
 
-## Proteção de Rotas (AuthGuard)
+### Proteção de Rotas (AuthGuard) [&#8673;](#menu)
 
 Criar um arquivo de configuração de guarda, nesse exemplo `auth.guard.ts`
 
@@ -293,7 +318,7 @@ const routes = [
 export class AppRoutingModule { }
 ```
 
-##  HttpClient - consumo de api
+##  HttpClient - consumo de api [&#8673;](#menu)
 O modulo pode ser importado no `app.modules.ts`, assim estará disponível em toda a aplicação.
 > Uma boa pratica é importar o o modulo `HttpClientModule` diretamente no módulo customizado e não de forma global
 ```javascript
@@ -305,7 +330,7 @@ imports: [
 ]
 ...
 ```
-### Consumindo uma API
+### Consumindo uma API [&#8673;](#menu)
 Exemplo de um arquivo `.service.ts`
 ```javascript
 import { HttpClient } from  '@angular/common/http';
@@ -326,7 +351,7 @@ export  class  ExampleService{
 }
 ```
 
-### Consumindo Service API
+### Consumindo Service API [&#8673;](#menu)
 ```javascript
 export  class  ExampleListComponent{
 	data: any[] = [];
@@ -343,9 +368,9 @@ export  class  ExampleListComponent{
 }
 ```
 
-## SimpleChanges in ngOnChange function
+## SimpleChanges in ngOnChange function [&#8673;](#menu)
 
-**SimpleChanges** é um recurso Angular / Core que pode ser usado para ver as mudanças e mais alguns detalhes dos nomes das propriedades declaradas em um componente. E também precisa ser usado nomé todoAngular **ngOnChange** para ver as mudanças de valores e fazer coisas relevantes.
+**SimpleChanges** é um recurso Angular / Core que pode ser usado para ver as mudanças e mais alguns detalhes dos nomes das propriedades declaradas em um componente. E também precisa ser usado nome todo Angular **ngOnChange** para ver as mudanças de valores e fazer coisas relevantes.
 
 Simplesmente o **ngOnChange** é disparado quando os valores das propriedades declaradas são alterados. Portanto, nesse método, podemos definir isso como um parâmetro para armazenar os dados. como isso:
 
@@ -376,7 +401,7 @@ export class ExampleOtherComponent implements OnChanges {
   }
 ```
 
-## target event 
+## target event [&#8673;](#menu)
 
 Para capturar ventos de compoentes html
 
@@ -393,7 +418,7 @@ Para capturar ventos de compoentes html
         >
 ```
 
-## Trasform data com pipe
+## Data Trasform  com pipe [&#8673;](#menu)
 
 Transformadores que poden ser utilizados em `ng expressions`
 
@@ -406,6 +431,8 @@ Transformadores que poden ser utilizados em `ng expressions`
 ...
 {{ birthday | date | uppercase}}
 ```
+
+### Custom pipe [&#8673;](#menu)
 
 Ainda é possivel definir um transformador customizado:
 
@@ -448,7 +475,7 @@ import { Component } from '@angular/core';
 export class PowerBoosterComponent { }
 ```
 
-## Resolver
+## Resolver [&#8673;](#menu)
 
 Interface que as classes podem implementar para ser um provedor de dados. Uma classe de provedor de dados pode ser usada com o roteador para resolver os dados durante a navegação. A interface define um resolve()método que é chamado quando a navegação é iniciada. O roteador espera que os dados sejam resolvidos antes que a rota seja finalmente ativada.
 ['traduzido']
@@ -461,7 +488,7 @@ interface Resolve<T> {
 }
 ```
 
-### Implemenação
+### Implemenação [&#8673;](#menu)
 
 > Um exemplo de utilização, é para casos onde a página deve aguardar a consulta de um serviço
 
@@ -516,11 +543,11 @@ const routes = [
 ```
 
 
-## Comunicação entre compoentes
+## Comunicação entre compoentes [&#8673;](#menu)
 
 A comunicação pode ser realizada através de um custom event.
 
-> Exemplo de u comente de pesquisa 
+> Exemplo de um componente de pesquisa 
 
 ```javascript
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
@@ -553,6 +580,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 }
 ```
+> `$event.target.value` capitura o value do imput em tempo de execução
 
 ```html
 <div class="container mt-m">
@@ -572,16 +600,22 @@ export class SearchComponent implements OnInit, OnDestroy {
   </div>
 ```
 
-> O evento customizado `onTyping` estará assistindo o compenten e informando as transições de estado. 
+> O evento customizado `onTyping` estará assistindo o compente e informando as transições de estado. 
 > 
 
 ```html
 <!-- utlizacao do componete -->
 <app-search (onTyping)="filter = $event" [value]="filter"></app-search>
 ```
+```javascript
+...
+// declaração do atributo filter no compenente que utiliza o `app-search`
+filter: string = '';
+...
+```
 
 
-## Diretivas
+## Diretivas [&#8673;](#menu)
 
 > Diretivas podem ser utilizadas para definir um comportamento de um elemento da página.
 
@@ -627,7 +661,7 @@ Utilizando a diretiva
 <div class="card" appDarkenOnHover brightness="80%">
 ```
 
-## Detectando a plataforma de execução
+## Detectando a plataforma de execução [&#8673;](#menu)
 
 Ao chamar o método `isPlatformBrowser` sera retornando true se estivere sendo executado em um navegador.
 
@@ -650,7 +684,7 @@ export class PlataformDetectorService {
 }
 ```
 
-## JWT decode
+## JWT decode [&#8673;](#menu)
 
 Para realizar decode de um token JWT
 
@@ -660,7 +694,7 @@ Para realizar decode de um token JWT
 npm install jwt-decode
 ```
 
-### Utlização
+### Utlização [&#8673;](#menu)
 
 ```javascript
 import { Injectable } from '@angular/core';
@@ -702,6 +736,318 @@ export class UserService {
     this.userSubject.next(user);
   }
 }
+```
+
+## Angular Forms [&#8673;](#menu)
+
+Para utilizar os recursos do angular forms é necessário atender alguns requisitos:
+- Importar o módulo `FormsModule`
+- Criar a varaivel de representação do formulário do tipo `FormGroup`
+- Injetar um `FormBuilder` para criação do formulário 
+
+> arquivo `.module.ts`
+```javascript
+// importação do modulo
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+...
+@NgModule({
+   ....
+    imports: [
+        ReactiveFormsModule,
+        CommonModule,
+        FormsModule
+    ]
+})
+```
+
+> arquivo `.component.ts`
+```javascript
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+...
+export class SignupComponent implements OnInit {
+
+  // cria a variavel de representação do formulário
+  signupForm: FormGroup;
+
+  // injeta o form builder
+  constructor(private formBuilder: FormBuilder) { }
+
+  // cria o formulario com sual propriedades
+  ngOnInit() {
+    this.signupForm = this.formBuilder.group({
+      email: [''],
+      fullName: [''],
+      userName: [''],
+      password: [''],
+    })
+  }
+}
+```
+
+> arquivo `.component.html`
+
+```html
+<div class="container">
+    <h4 class="center">Register to embrace a new world!</h4>
+    <!-- vincula a varaivel ao formulario e seus atributos -->
+    <form class="form mt-s" [formGroup]="signupForm"  (submit)="submitFormMetod()">
+       <input formControlName="email" id="email" type="email">
+       <input formControlName="fullName" id="full-name" type="text">
+       <input formControlName="userName" id="user-name" type="text">
+       <input formControlName="password" id="password" type="password" >
+      <button class="btn blue right">Register</button>
+    </form>
+</div> 
+```
+
+### Validators [&#8673;](#menu)
+
+Para facilitar, será apenas realizado o incremento do código acima.
+
+> arquivo `.component.ts`
+```javascript
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+...
+export class SignupComponent implements OnInit {
+
+  // cria a variavel de representação do formulário
+  signupForm: FormGroup;
+
+  // injeta o form builder
+  constructor(private formBuilder: FormBuilder) { }
+
+  // cria o formulario com sual propriedades
+  ngOnInit() {
+    this.signupForm = this.formBuilder.group({
+      email: ['',
+        [
+            Validators.required,
+            Validators.email
+        ]
+      ],
+      fullName: ['', []],
+      userName: [''
+        [
+          Validators.required,
+          Validators.pattern(/^[a-z0-9_\-]+$/),
+          Validators.minLength(2),
+          Validators.maxLength(30)
+        ]
+      ],
+      password: [''],
+    })
+  }
+}
+```
+
+> arquivo `.component.html`
+
+Verificando se alguma validação não esta sendo atendida e apresentando mensagem equivalente.
+```html
+<div class="container">
+    <h4 class="center">Register to embrace a new world!</h4>
+    <!-- vincula a varaivel ao formulario e seus atributos -->
+    <form class="form mt-s" [formGroup]="signupForm">
+      <div>
+        <input formControlName="email" id="email" type="email">
+        <small *ngIf="signupForm.get('email').errors?.required">Informe seu email!</small>
+        <small *ngIf="signupForm.get('email').errors?.email">Email invalido</small>
+      </div>
+       ...
+       <div>
+        <input formControlName="userName" id="user-name" type="text">
+         <small *ngIf="signupForm.get('userName').errors?.required">Campo obrigatorio</small>
+         <small *ngIf="signupForm.get('userName').errors?.minlength">No minimo 2 caracteres</small>
+        <small *ngIf="signupForm.get('userName').errors?.maxlength">No maximo 30 caracteres</small>
+        <small *ngIf="signupForm.get('userName').errors?.pattern">deve contar apenas numeros e letras (a-z e 0-9)!</small>
+      </div>
+       ...
+       <!-- desabilita o botao se o formular não estiver 100% validado -->
+      <button [disabled]="signupForm.invalid" class="btn blue right">Register</button>
+    </form>
+</div> 
+```
+
+### Custom validators [&#8673;](#menu)
+
+Criando um validator customizado.
+Um validator por ser uma função apenas, ou uma função de uma classe.
+
+> arquivo `src/app/shared/validators/lower-case.validator.ts`
+```javascript
+import { AbstractControl } from '@angular/forms';
+
+export function lowerCaseValidator(control: AbstractControl) {
+    if(control.value.trim() && !/^[a-z0-9_\-]+$/.test(control.value)) {
+        // ATENCAO: lowerCase será o retorno do validador
+        return {lowerCase: true}
+    }
+    return null;
+} 
+```
+
+> utilização
+
+```javascript
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+// importacao do nosso Validator
+import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
+
+  export class SignupComponent implements OnInit {
+  
+  signupForm: FormGroup;
+
+  ...
+
+  ngOnInit() {
+    const fn = this.userNotFoundValidatorService.checkUserNameTaken();
+
+    this.signupForm = this.formBuilder.group({
+      email: ['', 
+        [
+     export class SignupComponent implements OnInit {
+      ngOnInit() {
+        this.signupForm = this.formBuilder.group({
+          ...
+          userName: ['',
+            [
+              Validators.required,          
+              Validators.minLength(2),
+              Validators.maxLength(30),
+              // aqui realizamos a referencia ao nosso validador customizado
+              lowerCaseValidator
+            ]
+          ],
+        password: ['']
+        ...
+```
+
+Assim tempos que observar a necessidade de alteração da verificação de validações.
+Neste caso removemos a validação por pattern e adicionamos a validação customizada.
+
+> Mudando da seguinte forma:
+
+```html
+  ...
+    <div>
+        <input formControlName="userName" id="user-name" type="text">
+         <small *ngIf="signupForm.get('userName').errors?.required">Campo obrigatorio</small>
+         <small *ngIf="signupForm.get('userName').errors?.minlength">No minimo 2 caracteres</small>
+        <small *ngIf="signupForm.get('userName').errors?.maxlength">No maximo 30 caracteres</small>
+        <!-- ATENCAO: note que é utilziado o retorno do validador para verificar se o mesmo foi atendido-->
+        <small *ngIf="signupForm.get('userName').errors?.lowerCase">deve contar apenas numeros e letras (a-z e 0-9)!</small>
+    </div>
+    ...
+```
+
+### Custom validator service [&#8673;](#menu)
+
+Há momentos em que é necessário realizar uma validação que necessita o consumo de um serviço. Para esse fim pe possivel criar um Validator service.
+
+> arquivo `src/app/home/signup/user-not-taken.validator.service.ts`
+
+```javascript
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+const API_URL = "http://localhost:3000";
+
+@Injectable({providedIn: 'root'})
+export class SignUpService {
+
+
+    constructor (private http: HttpClient) {}
+
+    checkUserNameTaken(userName: string){
+        return this.http.get(API_URL + '/user/exists/' + userName);
+    }
+} 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import { Injectable } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
+import { debounceTime, switchMap, map, first } from 'rxjs/operators';
+import { SignUpService } from './signup.service';
+
+@Injectable({providedIn: 'root'})
+export class UserNotFoundValidatorService {
+
+    // inheção de um serviço que retorna um observable
+    constructor(private signUpService: SignUpService){}
+
+    checkUserNameTaken() {
+        return (control: AbstractControl) => {
+            return control
+                .valueChanges
+                .pipe(debounceTime(300))
+                .pipe(switchMap(userName => 
+                    this.signUpService.checkUserNameTaken(userName)
+                ))
+                .pipe(map(isTaken => isTaken ? {userNameTaken: true } : null ))
+                .pipe(first());
+        }
+    }
+
+} 
+```
+> Utilização
+
+Por ser um serviço e depender de uma requisição, nosso validador é asincrono e por isso não temos controle sobre o tempo de processamento das informações.
+
+Porém, a decração de um `fieldForm` permite a inclusão dos seguintes paramentros na sua declarção `fieldName: ['default value', [...array de validators sincronos], [... array de validator ASSINCRONOS]]`.
+
+Dessa forma é possivel declarar: 
+
+
+```javascript
+    ...
+    import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
+    import { UserNotFoundValidatorService } from './user-not-taken.validator.service';
+    ...
+    constructor(
+        private formBuilder: FormBuilder,
+        private userNotFoundValidatorService: UserNotFoundValidatorService
+      ) { }
+    ...
+      userName: ['',
+      [
+        Validators.required,
+        lowerCaseValidator, // o validar customizado
+        Validators.minLength(2),
+        Validators.maxLength(30)
+      ]
+      ],
+      this.userNotFoundValidatorService.checkUserNameTaken() // o validador assincrono
+    ],
+    ... 
+```
+
+No html para verificar o atendimento da validação, segue-se o padrão do validador customizado
+
+> Mudando da seguinte forma:
+
+> >  Quando utilizamos validadores asincronos e é necessário verificar se o formulario esta valido alé de `signupForm.invalid` devemos também verivicar se os async validators também foram atendidos com a expressão `signupForm.pending`.
+```html
+  ...
+    <div>
+        <input formControlName="userName" id="user-name" type="text">
+         <small *ngIf="signupForm.get('userName').errors?.required">Campo obrigatorio</small>
+         <small *ngIf="signupForm.get('userName').errors?.minlength">No minimo 2 caracteres</small>
+        <small *ngIf="signupForm.get('userName').errors?.maxlength">No maximo 30 caracteres</small>
+        <small *ngIf="signupForm.get('userName').errors?.lowerCase">deve contar apenas numeros e letras (a-z e 0-9)!</small>
+        <!-- ATENCAO: note que é utilziado o retorno do validador para verificar se o mesmo foi atendido-->
+        <small *ngIf="signupForm.get('userName').errors?.userNameTaken">Nome de usuário ja existe</small>
+         <small *ngIf="signupForm.get('userName').valid" class="green-text">Nome de usuário disponivel!</small>
+    </div>
+    ...
+    <button [disabled]="signupForm.invalid || signupForm.pending" class="btn blue right">Register</button>
 ```
 
 
