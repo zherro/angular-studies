@@ -75,7 +75,9 @@
             <div class="col s12">
                 <button [disabled]="signupForm.invalid || signupForm.pending" class="btn blue right">Register</button>
             </div>
-            <p class="center">Already a user? <a [routerLink]="['']">Sign In!</a></p>
+            <div class="col s12">
+                <p class="center">Already a user? <a [routerLink]="['']">Sign In!</a></p>
+            </div>
         </div>
     </form>
 </div>

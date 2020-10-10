@@ -17,12 +17,12 @@ import { CoreModule } from './core/core.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     
     PhotosModule,
     ErrorsModule,
-    HomeModule,
-    CoreModule
+    CoreModule,
+    
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

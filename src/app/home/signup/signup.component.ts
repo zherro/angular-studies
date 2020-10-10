@@ -10,7 +10,8 @@ import { UserNotFoundValidatorService } from './user-not-taken.validator.service
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
+  providers: [ UserNotFoundValidatorService ]
 })
 export class SignupComponent implements OnInit {
 

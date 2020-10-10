@@ -384,6 +384,76 @@ const routes = [
 export class AppRoutingModule { }
 ```
 
+
+### Pages Lazy Load, Rotas filhas ( DESEMPENHO ) #IMPORTANTE
+
+
+Quando o projeto é buildado, é derado apenas um arquivo `main.js`, esse unico arquivo contem toda a aplicação e só quando é carregado e interpretado o usuário tem a vizualização da aplicação.
+
+Nesse cenário destaca-se a importancia do lazy load, onde é possivel devinir modulos que serão carregados apenas quando o usuário solicitar.
+
+Para iniciar no que será `lazy`, criar arquivo de rotas para o modulo. Criado para os compentes `home` desse projeto.
+
+
+> `...src\app\home\home.routing.module.ts`
+```javascript
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { AuthGuard } from '../core/auth/auth.guard';
+import { SiginComponent } from './sigin/sigin.component';
+import { SignupComponent } from './signup/signup.component';
+
+
+const routes = [ 
+  {  
+    path: '', 
+    component: HomeComponent, 
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', component: SiginComponent },
+      { path: 'signup', component: SignupComponent },
+    ]
+  }
+];
+
+@NgModule({
+  declarations: [],
+  imports: [
+    // IMPORTANTE:  apenas o HomeRoutingModule deve utilizar .forRoot
+    RouterModule.forChild(routes)
+  ],
+  exports: [
+    RouterModule
+  ]
+})
+export class HomeRoutingModule { }
+```
+
+> IMPORTANTE: lembra sempre, que quando um modulo é lazy ele não deve ser importado pelo `AppModule`, para que não seja carregado ao inciar a aplicação.
+
+- importar o `HomeRoutingModule` no `HomeModule`
+- Remover `HomeModule` do `AppModule`
+
+Por fim nas configurações de rota da aplicação definir o `route children`:
+
+```javascript
+...
+const routes = [ 
+  {
+    path: '',
+    // full pathMath para garantir que será considerado especificamente o path
+    pathMatch: 'full',
+    redirectTo: 'home'
+  },
+  {
+  // aqui define-se o children modulo que deve ser carregado quando a hota /home for acionada
+   path: 'home',
+   loadChildren: './home/home.module#HomeModule' 
+  },
+...
+```
+
 ##  HttpClient - consumo de api
  [Voltar ao topo &#8673;](#menu)
 

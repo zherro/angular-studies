@@ -10,15 +10,15 @@ import { AuthGuard } from './core/auth/auth.guard';
 import { SignupComponent } from './home/signup/signup.component';
 import { HomeComponent } from './home/home/home.component';
 
-const routes = [  
-  {  
-    path: '', 
-    component: HomeComponent, 
-    canActivate: [AuthGuard],
-    children: [
-      { path: '', component: SiginComponent },
-      { path: 'signup', component: SignupComponent },
-    ]
+const routes = [ 
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'home'
+  },
+  {
+   path: 'home',
+   loadChildren: './home/home.module#HomeModule' 
   },
   {
     path: 'user/:userName', component: PhotoListComponent,
