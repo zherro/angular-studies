@@ -26,6 +26,7 @@ export class SiginComponent implements OnInit {
       userName: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.userNameImput.nativeElement.focus();
   }
 
   login(){

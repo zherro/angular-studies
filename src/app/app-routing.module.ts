@@ -8,10 +8,18 @@ import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 import { SiginComponent } from './home/sigin/sigin.component';
 import { AuthGuard } from './core/auth/auth.guard';
 import { SignupComponent } from './home/signup/signup.component';
+import { HomeComponent } from './home/home/home.component';
 
 const routes = [  
-  { path: '', component: SiginComponent, canActivate: [AuthGuard] },
-  { path: 'signup', component: SignupComponent },
+  {  
+    path: '', 
+    component: HomeComponent, 
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', component: SiginComponent },
+      { path: 'signup', component: SignupComponent },
+    ]
+  },
   {
     path: 'user/:userName', component: PhotoListComponent,
     resolve: {
@@ -26,7 +34,7 @@ const routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {useHash: true})
   ],
   exports: [
     RouterModule

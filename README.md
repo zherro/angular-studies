@@ -15,7 +15,8 @@
 	* [Parâmetros](#parâmetros)
 * [Subject e BehaviorSubject](#subject-e-behaviorsubject)
 * [Rotas](#rotas)
-	* [Parâmetros Dinâmicos](#parâmetros-dinâmicos)
+  * [Retrocompatibilidade com navegadores](#retrocompatibilidade-com-navegadores)
+  * [Parâmetros Dinâmicos](#parâmetros-dinâmicos)
   * [Proteção de Rotas (AuthGuard)](#proteção-de-rotas-authguard)
 * [HttpClient - consumo de api](#httpclient---consumo-de-api)
 	* [Consumindo uma API](#consumindo-uma-api)
@@ -272,6 +273,35 @@ export class AppRoutingModule { }
     ErrorsModule
   ],
 ```
+
+
+### Retrocompatibilidade com navegadores
+
+O angular por padrão trabalha apenas com as duas ultimas versões de alguns navegadores.
+
+Isso significa que navegadores antigos não são testados pela equipe do Angular.
+
+Dessa forma pode ocorrer alguns problemas em navegadores antidos e um deles é relacionado a navegação.
+
+Caso houver problemas quanto ao direcionamento de rotas da aplicação utilizar a configuração `{useHash: true}` no `app-routing-module.ts`.
+
+Assim será adicionado um `#` na url, impedindo que a aplicação consulte o backend para o redireciomanto de rotas.
+
+```javascript
+... 
+@NgModule({
+  declarations: [],
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes, {useHash: true})
+  ],
+  exports: [
+    RouterModule
+  ]
+})
+export class AppRoutingModule { }
+```
+
 
 ### Parâmetros Dinâmicos 
  [Voltar ao topo &#8673;](#menu)

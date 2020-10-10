@@ -4,7 +4,7 @@
     <form class="form mt-s" [formGroup]="signupForm" (submit)="signup()">
         <div class="row">
             <div class="input-field col s6">
-                <input formControlName="email" id="email" type="email" class="validate">
+                <input #inputEmail formControlName="email" id="email" type="email" class="validate">
                 <label for="email">Email</label>
                 <app-vmessage 
                     text="Informe seu email!"
