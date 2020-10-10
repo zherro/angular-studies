@@ -12,7 +12,7 @@
 * [Módulos e Componentes](#módulos-e-componentes-&#8673;)
 	* [Criando componente](#criando-componente-&#8673;)
 	* [Criando módulo](#criando-módulo-&#8673;)
-	* [Parâmetros](#parâmetros-&#8673;)
+	* [Parâmetros](#parâmetro)
 * [Subject e BehaviorSubject](#subject-e-behaviorsubject-&#8673;)
 * [Rotas](#rotas-&#8673;)
 	* [Parâmetros Dinâmicos](#parâmetros-dinâmicos-&#8673;)
