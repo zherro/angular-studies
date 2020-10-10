@@ -5,45 +5,51 @@
 ## Menu
 
 * [Versions](#versions)
-* [Configurações iniciais](#configurações-iniciais-&#8673;)
-	* [Animations](#animations-&#8673;)
-	* [Materialize](#materialize-&#8673;)
-  * [font-awesome](#font-awesome-&#8673;)
-* [Módulos e Componentes](#módulos-e-componentes-&#8673;)
-	* [Criando componente](#criando-componente-&#8673;)
-	* [Criando módulo](#criando-módulo-&#8673;)
-	* [Parâmetros](#parâmetro)
-* [Subject e BehaviorSubject](#subject-e-behaviorsubject-&#8673;)
-* [Rotas](#rotas-&#8673;)
-	* [Parâmetros Dinâmicos](#parâmetros-dinâmicos-&#8673;)
-  * [Proteção de Rotas (AuthGuard)](#proteção-de-rotas-authguard-&#8673;)
-* [HttpClient - consumo de api](#httpclient---consumo-de-api-&#8673;)
-	* [Consumindo uma API](#consumindo-uma-api-&#8673;)
-	* [Consumindo Service API](#consumindo-service-api-&#8673;)
-* [SimpleChanges in ngOnChange function](#simpleChanges-in-ngonchange-function-&#8673;)
-* [target event](#target-event-&#8673;)
-* [Data Trasform com pipe](#data-trasform-com-pipe-&#8673;)
-  * [Custom pipe](#custom-pipe-&#8673;)
-* [Resolver](#resolver-&#8673;)
-  * [Implemenação](#implemenação-&#8673;)
-* [Comunicação entre compoentes](#comunicação-entre-compoentes-&#8673;)
-* [Diretivas](#diretivas-&#8673;) 
-* [Detectando a plataforma de execução](#detectando-a-plataforma-de-execução-&#8673;)
-* [JWT decode](#jwt-decode-&#8673;)
-  * [Utlização](#utlização-&#8673;)
-* [Angular Forms](#angular-forms-&#8673;)
-  * [Validators](#validators-&#8673;)
-  * [Custom validators](#custom-validators-&#8673;)
-  * [Custom validator service](#custom-validator-service-&#8673;)
-* [Build](#build-&#8673;)
+* [Configurações iniciais](#configurações-iniciais)
+	* [Animations](#animations)
+	* [Materialize](#materialize)
+  * [font-awesome](#font-awesome)
+* [Módulos e Componentes](#módulos-e-componentes)
+	* [Criando componente](#criando-componente)
+	* [Criando módulo](#criando-módulo)
+	* [Parâmetros](#parâmetros)
+* [Subject e BehaviorSubject](#subject-e-behaviorsubject)
+* [Rotas](#rotas)
+	* [Parâmetros Dinâmicos](#parâmetros-dinâmicos)
+  * [Proteção de Rotas (AuthGuard)](#proteção-de-rotas-authguard)
+* [HttpClient - consumo de api](#httpclient---consumo-de-api)
+	* [Consumindo uma API](#consumindo-uma-api)
+	* [Consumindo Service API](#consumindo-service-api)
+* [SimpleChanges in ngOnChange function](#simpleChanges-in-ngonchange-function)
+* [target event](#target-event)
+* [Data Trasform com pipe](#data-trasform-com-pipe)
+  * [Custom pipe](#custom-pipe)
+* [Resolver](#resolver)
+  * [Implemenação](#implemenação)
+* [Comunicação entre compoentes](#comunicação-entre-compoentes)
+* [Diretivas](#diretivas) 
+* [Detectando a plataforma de execução](#detectando-a-plataforma-de-execução)
+* [JWT decode](#jwt-decode)
+  * [Utlização](#utlização)
+* [Angular Forms](#angular-forms)
+  * [Validators](#validators)
+  * [Custom validators](#custom-validators)
+  * [Custom validator service](#custom-validator-service)
+* [Build](#build)
 
 ## Versions
  - [Angular 8.3.12](https://angular.io/){:target="_blank"}
  - [Materialize ^6.1.3](https://materializecss.com/){:target="_blank"}
 
-## Configurações iniciais [&#8673;](#menu)
+## Configurações iniciais
+ [Voltar ao topo &#8673;](#menu)
 
-### Animations [&#8673;](#menu)
+ 
+
+### Animations
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 > Você usa animações adicionando-as a cada módulo que deseja que sejam usados. Se você deseja que eles sejam usados ​​em todo o seu aplicativo, você pode adicioná-los ao seu `app.module.ts` arquivo assim:
 ```cmd
@@ -73,7 +79,10 @@ import { BrowserAnimationsModule } from  '@angular/platform-browser/animations';
 export  class  AppModule { }
 ```
 
-### Materialize [&#8673;](#menu)
+### Materialize
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 > Criado e projetado pelo Google, o Material Design é uma linguagem de design que combina os princípios clássicos do design de sucesso com inovação e tecnologia. 
 
@@ -98,7 +107,10 @@ export  class  AppModule { }
 		]
 ```
 
-## font-awesome [&#8673;](#menu)
+## font-awesome
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 Adicionar pacote ao projeto
 
@@ -116,13 +128,19 @@ Em seguida adicionar ao `angular.json`
   ],
 ```
 
-##  Módulos e Componentes  [&#8673;](#menu)
+##  Módulos e Componentes 
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 Um componente reutilizável e acionada através do selector name, definido no próprio componente.
 
 	<app-componente-name></app-componente-name>
 
-### Criando componente [&#8673;](#menu)
+### Criando componente
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 ```javascript
 // cria componente utilizando angular CLI
 ng generate component nomedocompomente
@@ -139,7 +157,10 @@ Para tornar o componente reutilizável, incluir a declaração do componente no 
 ...
 ```
 
-### Criando módulo [&#8673;](#menu)
+### Criando módulo
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 Um modulo é um arquivo .ts  que agrupa e disponibiliza um ou mais componentes. 
 Exemplo de configuração do módulo `photos.module.ts`:
 
@@ -175,7 +196,10 @@ Para declarar o modulo e disponibilizar os componentes para toda a aplicação, 
 export  class  AppModule { }
 ```
 
-###  Parâmetros [&#8673;](#menu)
+###  Parâmetros
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 Para adicionar parâmetros em um componente, utilizar o @Input()
 
 ```javascript
@@ -192,7 +216,10 @@ import {  Input } from  '@angular/core';
 // utlização do componente 
 <app-photo [url]="./../../assets/imgs/imagem.jpge" [description]="Imgagem aleatória" ></app-photo>
 ```
-## Subject e BehaviorSubject [&#8673;](#menu)
+## Subject e BehaviorSubject
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 `BehaviorSubject` é um tipo de subject, um subject é um tipo especial de observable para que você possa assinar mensagens como qualquer outro observable. Os recursos exclusivos do BehaviorSubject são:
 
@@ -200,7 +227,10 @@ import {  Input } from  '@angular/core';
 * Na assinatura, ele retorna o último valor do assunto. Um observável regular apenas dispara quando recebe um `onnext`
 * a qualquer momento, você pode recuperar o último valor do assunto em um código não observável usando o método `getValue()`
 
-## Rotas [&#8673;](#menu)
+## Rotas
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 > Criar arquivo `app-routing.module.ts` na pasta `./src/app`
 
 ```javascript
@@ -243,7 +273,10 @@ export class AppRoutingModule { }
   ],
 ```
 
-### Parâmetros Dinâmicos  [&#8673;](#menu)
+### Parâmetros Dinâmicos 
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 > Para adicionar paramentros as rotas, utilizar `/:paranName`
 
 ```javascript
@@ -272,7 +305,10 @@ export class ExampleComponent implements OnInit {
 }
 ```
 
-### Proteção de Rotas (AuthGuard) [&#8673;](#menu)
+### Proteção de Rotas (AuthGuard)
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 Criar um arquivo de configuração de guarda, nesse exemplo `auth.guard.ts`
 
@@ -318,7 +354,10 @@ const routes = [
 export class AppRoutingModule { }
 ```
 
-##  HttpClient - consumo de api [&#8673;](#menu)
+##  HttpClient - consumo de api
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 O modulo pode ser importado no `app.modules.ts`, assim estará disponível em toda a aplicação.
 > Uma boa pratica é importar o o modulo `HttpClientModule` diretamente no módulo customizado e não de forma global
 ```javascript
@@ -330,7 +369,10 @@ imports: [
 ]
 ...
 ```
-### Consumindo uma API [&#8673;](#menu)
+### Consumindo uma API
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 Exemplo de um arquivo `.service.ts`
 ```javascript
 import { HttpClient } from  '@angular/common/http';
@@ -351,7 +393,10 @@ export  class  ExampleService{
 }
 ```
 
-### Consumindo Service API [&#8673;](#menu)
+### Consumindo Service API
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 ```javascript
 export  class  ExampleListComponent{
 	data: any[] = [];
@@ -368,7 +413,10 @@ export  class  ExampleListComponent{
 }
 ```
 
-## SimpleChanges in ngOnChange function [&#8673;](#menu)
+## SimpleChanges in ngOnChange function
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 **SimpleChanges** é um recurso Angular / Core que pode ser usado para ver as mudanças e mais alguns detalhes dos nomes das propriedades declaradas em um componente. E também precisa ser usado nome todo Angular **ngOnChange** para ver as mudanças de valores e fazer coisas relevantes.
 
@@ -401,7 +449,10 @@ export class ExampleOtherComponent implements OnChanges {
   }
 ```
 
-## target event [&#8673;](#menu)
+## target event
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 Para capturar ventos de compoentes html
 
@@ -418,7 +469,10 @@ Para capturar ventos de compoentes html
         >
 ```
 
-## Data Trasform  com pipe [&#8673;](#menu)
+## Data Trasform  com pipe
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 Transformadores que poden ser utilizados em `ng expressions`
 
@@ -432,7 +486,10 @@ Transformadores que poden ser utilizados em `ng expressions`
 {{ birthday | date | uppercase}}
 ```
 
-### Custom pipe [&#8673;](#menu)
+### Custom pipe
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 Ainda é possivel definir um transformador customizado:
 
@@ -475,7 +532,10 @@ import { Component } from '@angular/core';
 export class PowerBoosterComponent { }
 ```
 
-## Resolver [&#8673;](#menu)
+## Resolver
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 Interface que as classes podem implementar para ser um provedor de dados. Uma classe de provedor de dados pode ser usada com o roteador para resolver os dados durante a navegação. A interface define um resolve()método que é chamado quando a navegação é iniciada. O roteador espera que os dados sejam resolvidos antes que a rota seja finalmente ativada.
 ['traduzido']
@@ -488,7 +548,10 @@ interface Resolve<T> {
 }
 ```
 
-### Implemenação [&#8673;](#menu)
+### Implemenação
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 > Um exemplo de utilização, é para casos onde a página deve aguardar a consulta de um serviço
 
@@ -543,7 +606,10 @@ const routes = [
 ```
 
 
-## Comunicação entre compoentes [&#8673;](#menu)
+## Comunicação entre compoentes
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 A comunicação pode ser realizada através de um custom event.
 
@@ -615,7 +681,10 @@ filter: string = '';
 ```
 
 
-## Diretivas [&#8673;](#menu)
+## Diretivas
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 > Diretivas podem ser utilizadas para definir um comportamento de um elemento da página.
 
@@ -661,7 +730,10 @@ Utilizando a diretiva
 <div class="card" appDarkenOnHover brightness="80%">
 ```
 
-## Detectando a plataforma de execução [&#8673;](#menu)
+## Detectando a plataforma de execução
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 Ao chamar o método `isPlatformBrowser` sera retornando true se estivere sendo executado em um navegador.
 
@@ -684,7 +756,10 @@ export class PlataformDetectorService {
 }
 ```
 
-## JWT decode [&#8673;](#menu)
+## JWT decode
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 Para realizar decode de um token JWT
 
@@ -694,7 +769,10 @@ Para realizar decode de um token JWT
 npm install jwt-decode
 ```
 
-### Utlização [&#8673;](#menu)
+### Utlização
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 ```javascript
 import { Injectable } from '@angular/core';
@@ -738,7 +816,10 @@ export class UserService {
 }
 ```
 
-## Angular Forms [&#8673;](#menu)
+## Angular Forms
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 Para utilizar os recursos do angular forms é necessário atender alguns requisitos:
 - Importar o módulo `FormsModule`
@@ -803,7 +884,10 @@ export class SignupComponent implements OnInit {
 </div> 
 ```
 
-### Validators [&#8673;](#menu)
+### Validators
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 Para facilitar, será apenas realizado o incremento do código acima.
 
@@ -872,7 +956,10 @@ Verificando se alguma validação não esta sendo atendida e apresentando mensag
 </div> 
 ```
 
-### Custom validators [&#8673;](#menu)
+### Custom validators
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 Criando um validator customizado.
 Um validator por ser uma função apenas, ou uma função de uma classe.
@@ -946,7 +1033,10 @@ Neste caso removemos a validação por pattern e adicionamos a validação custo
     ...
 ```
 
-### Custom validator service [&#8673;](#menu)
+### Custom validator service
+ [Voltar ao topo &#8673;](#menu)
+
+ 
 
 Há momentos em que é necessário realizar uma validação que necessita o consumo de um serviço. Para esse fim pe possivel criar um Validator service.
 
