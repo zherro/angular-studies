@@ -1,0 +1,8 @@
+<footer style="position: absolute; bottom: 0; width: 100%;" class="page-footer" *ngIf="(user$ | async) as user">
+    <div class="footer-copyright">
+        <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" [routerLink]="['p', 'add']"><i class="fa fa-plus-circle"></i></a>
+        </div>
+    </div>
+</footer>

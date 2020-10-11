@@ -9,6 +9,7 @@ import { SiginComponent } from './home/sigin/sigin.component';
 import { AuthGuard } from './core/auth/auth.guard';
 import { SignupComponent } from './home/signup/signup.component';
 import { HomeComponent } from './home/home/home.component';
+import { RequiresAuthGuard } from './core/auth/requires-auth.guard';
 
 const routes = [ 
   {
@@ -26,7 +27,7 @@ const routes = [
       photos: PhotoListResolver
     }
   },
-  { path: 'p/add', component: PhotoFormComponent },
+  { path: 'p/add', component: PhotoFormComponent, canActivate: [RequiresAuthGuard]},
   { path: '**', component: NotFoundComponent }
 ];
 
