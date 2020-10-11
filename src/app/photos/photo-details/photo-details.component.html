@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row" *ngIf="(photo$ | async) as photo">
+        <div class="col m8 s12">
+            <app-photo [url]="photo.url" [description]="photo.description" ></app-photo>
+        </div>
+        <div class="col m4 s12">  
+            <small>
+                <p class="left flow-text">{{photo.description}}</p>
+            </small>
+            <div>
+                <app-photo-comment [photoId]="id"></app-photo-comment>
+            </div>
+        </div>
+    </div>
+</div>

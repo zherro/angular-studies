@@ -16,6 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VMessageModule } from '../shared/components/vmessage/vmessage.modeule';
 import { Router, RouterModule } from '@angular/router';
 import { ImmediateClickModule } from '../shared/componets/directives/immediate-click/immediate-click.module';
+import { PhotoDetailsComponent } from './photo-details/photo-details.component';
+import { CommentComponent } from './photo-details/comment/comment.component';
 
 @NgModule({
     declarations: [ 
@@ -28,7 +30,11 @@ import { ImmediateClickModule } from '../shared/componets/directives/immediate-c
         
         LoadButtonComponent,
         
-        SearchComponent
+        SearchComponent,
+        
+        PhotoDetailsComponent,
+        
+        CommentComponent
     ],
     imports: [ 
         HttpClientModule, 

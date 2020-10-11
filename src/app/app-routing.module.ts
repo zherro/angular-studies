@@ -10,6 +10,7 @@ import { AuthGuard } from './core/auth/auth.guard';
 import { SignupComponent } from './home/signup/signup.component';
 import { HomeComponent } from './home/home/home.component';
 import { RequiresAuthGuard } from './core/auth/requires-auth.guard';
+import { PhotoDetailsComponent } from './photos/photo-details/photo-details.component';
 
 const routes = [ 
   {
@@ -28,6 +29,7 @@ const routes = [
     }
   },
   { path: 'p/add', component: PhotoFormComponent, canActivate: [RequiresAuthGuard]},
+  { path: 'p/:photoId', component: PhotoDetailsComponent},
   { path: '**', component: NotFoundComponent }
 ];
 

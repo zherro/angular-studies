@@ -1,0 +1,23 @@
+<ul class="collection comment-list" *ngIf="(photoComments$ | async) as comments">
+    <li class="collection-item avatar" *ngFor="let c of comments">
+      <!-- img src="images/yuna.jpg" alt="" class="circle" -->
+      <span class="title"><a [routerLink]="['/user', c.userName]">{{ c.userName }}</a></span>
+      <em>{{ c.date | date: 'dd-MM-yyyy HH:mm' }}</em>
+      <p>{{c.text}}</p>
+    </li>
+  </ul>
+  <form [formGroup]="commentForm" (submit)="save()">
+    <div class="row">
+        <div class="input-field col s12">
+        <textarea formControlName="comment" id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1"></label>
+        <app-vmessage
+           text="Max length 300"
+           *ngIf="commentForm.get('comment').errors?.maxlength"
+        ></app-vmessage>
+        </div>
+    </div>
+    <div class="col s12">
+        <button class="btn blue right" [disabled]="commentForm.invalid">Publish</button>
+    </div>
+  </form>
