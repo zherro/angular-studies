@@ -1,0 +1,5 @@
+<div *ngFor="let alert of alerts" class="{{ getAlertClass(alert) }}">
+    <div class="card-content">
+        <p><i class="{{ getAlertIcon(alert) }}"></i>{{ alert.message }}</p>
+    </div>
+</div>

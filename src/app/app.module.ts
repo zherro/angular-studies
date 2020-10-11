@@ -9,6 +9,7 @@ import { ErrorsModule } from './errors/errors.module';
 import { HomeModule } from './home/home.module';
 import { HeaderComponent } from './core/header/header/header.component';
 import { CoreModule } from './core/core.module';
+import { AlertComponent } from './shared/components/alert/alert.component';
 
 @NgModule({
   declarations: [

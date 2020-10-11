@@ -30,6 +30,7 @@ const routes = [
   },
   { path: 'p/add', component: PhotoFormComponent, canActivate: [RequiresAuthGuard]},
   { path: 'p/:photoId', component: PhotoDetailsComponent},
+  { path: 'not-found', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

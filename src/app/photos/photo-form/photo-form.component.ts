@@ -2,6 +2,8 @@ import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/core/user/user.service';
+import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { PhotoService } from '../photo/photo.service';
 
 @Component({
@@ -18,7 +20,9 @@ export class PhotoFormComponent implements OnInit {
   constructor(
     private formBuilder : FormBuilder,
     private photoService: PhotoService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -35,7 +39,11 @@ export class PhotoFormComponent implements OnInit {
     this.photoService
       .upload(s, ac, this.file)
       .subscribe(
-        () => this.router.navigate([''])
+        () => {
+          this.alertService.success("Upload completed!", true);
+          this.router.navigate(['/user', this.userService.getUserName() ]);
+        },
+        err => this.alertService.danger("Upload error!", true)
       );
 
     // console.table(dados);
