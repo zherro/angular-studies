@@ -19,6 +19,8 @@ import { ImmediateClickModule } from '../shared/componets/directives/immediate-c
 import { PhotoDetailsComponent } from './photo-details/photo-details.component';
 import { CommentComponent } from './photo-details/comment/comment.component';
 import { PhotoOwnerDirective } from './photo-details/photo-owner-only/phoyo-owner.directive';
+import { ShowIfLoggedDirective } from '../shared/componets/directives/show-if-logged/show-if-logged.directive copy';
+import { ShowIfLoggedModule } from '../shared/componets/directives/show-if-logged/show-if-logged.module';
 
 @NgModule({
     declarations: [ 
@@ -45,7 +47,8 @@ import { PhotoOwnerDirective } from './photo-details/photo-owner-only/phoyo-owne
         FormsModule,
         RouterModule,
         VMessageModule,
-        ImmediateClickModule
+        ImmediateClickModule,
+        ShowIfLoggedModule
     ]
 })
 export class PhotosModule {}

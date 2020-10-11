@@ -8,6 +8,7 @@
                 <p class="left">{{photo.description}}</p><br>
             </div>
             <div class="col s12">
+                <i (click)="like(photo)" showIfLogged class="fa fa-heart-o fa pt-xxs pr-0 left"></i>{{ photo.likes }}
                 <i class="fa fa-comment-o fa p-xxs"></i>{{ photo.comments }}
                 <i photoOwnerOnly [ownedPhoto]="photo"  (click)="remove()" class="fa fa-trash-o fa-2x right"></i>
             </div>
