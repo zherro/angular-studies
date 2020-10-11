@@ -1,5 +1,9 @@
   <div class="navbar-fixed">
+    <app-loading></app-loading>
     <nav>
+      <!-- <button (click)="togle()">menu</button> -->
+      <!-- <app-menu #menu>
+        </app-menu> -->
       <div class="nav-wrapper container">
         <a [routerLink]="['']" class="brand-logo">°0°</a>
         <div *ngIf="(user$ | async ) as user; else login" class="right">

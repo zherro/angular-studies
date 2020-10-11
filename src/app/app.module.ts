@@ -10,6 +10,7 @@ import { HomeModule } from './home/home.module';
 import { HeaderComponent } from './core/header/header/header.component';
 import { CoreModule } from './core/core.module';
 import { AlertComponent } from './shared/components/alert/alert.component';
+import { MenuComponent } from './shared/components/menu/menu.component';
 
 @NgModule({
   declarations: [
