@@ -1,15 +1,22 @@
-<div class="container">
+<div class="container mt-xs">
     <div class="row" *ngIf="(photo$ | async) as photo">
         <div class="col m8 s12">
             <app-photo [url]="photo.url" [description]="photo.description" ></app-photo>
         </div>
-        <div class="col m4 s12">  
-            <small>
-                <p class="left flow-text">{{photo.description}}</p>
-            </small>
-            <div>
-                <app-photo-comment [photoId]="id"></app-photo-comment>
+        <div class="col m4 s12">
+            <div class="col s12">
+                <p class="left">{{photo.description}}</p><br>
             </div>
+            <div class="col s12">
+                <i class="fa fa-comment-o fa p-xxs"></i>{{ photo.comments }}
+                <i photoOwnerOnly [ownedPhoto]="photo"  (click)="remove()" class="fa fa-trash-o fa-2x right"></i>
+            </div>
+        </div>
+        <div class="col m4 s12">  
+            <app-photo-comment *ngIf="photo.allowComments;else warning" [photoId]="id"></app-photo-comment>
+            <ng-template #warning>
+                <span class="orange-text">This Photo not allowed comments</span>
+            </ng-template>
         </div>
     </div>
 </div>

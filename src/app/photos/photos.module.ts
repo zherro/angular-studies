@@ -18,6 +18,7 @@ import { Router, RouterModule } from '@angular/router';
 import { ImmediateClickModule } from '../shared/componets/directives/immediate-click/immediate-click.module';
 import { PhotoDetailsComponent } from './photo-details/photo-details.component';
 import { CommentComponent } from './photo-details/comment/comment.component';
+import { PhotoOwnerDirective } from './photo-details/photo-owner-only/phoyo-owner.directive';
 
 @NgModule({
     declarations: [ 
@@ -28,13 +29,11 @@ import { CommentComponent } from './photo-details/comment/comment.component';
         
         filterByDescription,
         
-        LoadButtonComponent,
-        
-        SearchComponent,
-        
-        PhotoDetailsComponent,
-        
-        CommentComponent
+        LoadButtonComponent,        
+        SearchComponent,        
+        PhotoDetailsComponent,        
+        CommentComponent,
+        PhotoOwnerDirective
     ],
     imports: [ 
         HttpClientModule, 
