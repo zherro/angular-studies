@@ -42,10 +42,15 @@
                     </label>
                   </p>
             </div>
-            <div class="col s12">
+            <div class="col s12" *ngIf="!percentDone; else percent">
                 <button [disabled]="photoForm.invalid" class="right btn green m-xxs">Upload</button>
-                <button class="right btn grey m-xxs">Cancel</button>
+                <button [routerLink]="['']" class="right btn grey m-xxs">Cancel</button>
             </div>
+            <ng-template #percent>
+                <div class="progress">
+                    <div class="determinate" style="width: {{ percentDone}}%"></div>
+                </div>
+            </ng-template>
         </div>
     </form>
 </div>
