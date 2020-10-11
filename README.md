@@ -15,6 +15,7 @@
 	* [Parâmetros](#parâmetros)
 * [Subject e BehaviorSubject](#subject-e-behaviorsubject)
 * [Rotas](#rotas)
+  * [Page Titles](#page-titles)
   * [Retrocompatibilidade com navegadores](#retrocompatibilidade-com-navegadores)
   * [Parâmetros Dinâmicos](#parâmetros-dinâmicos)
   * [Proteção de Rotas (AuthGuard)](#proteção-de-rotas-authguard)
@@ -273,7 +274,78 @@ export class AppRoutingModule { }
     ErrorsModule
   ],
 ```
+### Page Titles
+ [Voltar ao topo &#8673;](#menu)
 
+Definindo de forma dinâmica os tiludos das pádinas da aplicação
+
+Definir nos modulos de rota o atributo `data`
+
+```javascript
+const routes = [ 
+  ...
+  { 
+    path: 'p/add',
+    component: PhotoFormComponent,
+    canActivate: [RequiresAuthGuard],
+    data: {
+      title: 'Photo Upload'
+    }
+  },
+  { 
+    path: 'p/:photoId',
+    component: PhotoDetailsComponent,
+    data: {
+      title: 'Photo Detail'
+    }
+  },
+  { 
+    path: 'not-found',
+    component: NotFoundComponent,
+    data: {
+      title: 'Not Found'
+    }
+  },
+  ...
+```
+
+> No `app.module.ts`, primeiro móulo a ser criado quando a aplicação é iniciada, devemos definir a lógica de nomeação de páginas.
+
+Segue algoritimo funcional:
+
+```javascript
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter, map, switchMap } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit{
+  title = 'angular-studies';
+  
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private titleService: Title,
+  ){}
+
+  ngOnInit(): void {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(map(() => this.route))
+      .pipe(map(route => {
+        while(route.firstChild) route = route.firstChild;
+        return route;
+      }))
+      .pipe(switchMap(route => route.data))
+      .subscribe(event => this.titleService.setTitle(event.title))
+  }
+}
+```
 
 ### Retrocompatibilidade com navegadores
 

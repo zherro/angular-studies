@@ -1,7 +1,7 @@
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper container">
-        <a href="#!" class="brand-logo">°0°</a>
+        <a [routerLink]="['']" class="brand-logo">°0°</a>
         <div *ngIf="(user$ | async ) as user; else login" class="right">
           <i class="fa fa-user-o mh-xxs"></i>
           <span class="mh-xxs">{{ user?.name}}</span>
