@@ -6,6 +6,7 @@ import { NewUser } from 'src/app/core/user/new-user';
 import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
 import { SignUpService } from './signup.service';
 import { UserNotFoundValidatorService } from './user-not-taken.validator.service';
+import { userNamePassword } from './username-password.validator';
 
 @Component({
   selector: 'app-signup',
@@ -58,7 +59,8 @@ export class SignupComponent implements OnInit {
         Validators.minLength(8),
         Validators.maxLength(14)
       ]
-    ],
+    ]}, {
+      validators: userNamePassword
     })
 
     this.plataformDetectorService.isPlatformBrowser() && 

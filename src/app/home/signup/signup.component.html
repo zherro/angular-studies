@@ -71,6 +71,10 @@
                     text="No maximo 14 caracteres"
                     *ngIf="signupForm.get('password').errors?.maxlength"
                 ></app-vmessage>
+                <app-vmessage 
+                    text="User name and password must be diferrent"
+                    *ngIf="signupForm.errors?.userNamePassword"
+                ></app-vmessage>
             </div>
             <div class="col s12">
                 <button [disabled]="signupForm.invalid || signupForm.pending" class="btn blue right">Register</button>

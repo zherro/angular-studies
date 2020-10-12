@@ -1,6 +1,7 @@
 <div class="row">
     <h4 class="center">Login</h4>
     <form 
+        #form="ngForm"
         (submit)="login()"
         [formGroup]="loginForm" 
         class="col s4" 
@@ -16,16 +17,16 @@
                 <label for="first_name">First Name</label>
                 <app-vmessage 
                     text="Informe seu login!"
-                    *ngIf="loginForm.get('userName').errors?.required"
+                    *ngIf="(form.submitted || loginForm.get('userName').touched) && loginForm.get('userName').errors?.required"
                 ></app-vmessage>
             </div>
             <div class="input-field col s12">
                 <input  type="password" formControlName="password">
                 <label for="last_name">Last Name</label>
-                <app-vmessage *ngIf="loginForm.get('userName').errors?.required"></app-vmessage>
+                <app-vmessage *ngIf="form.submitted && loginForm.get('userName').errors?.required"></app-vmessage>
             </div>
             <div class="col s12">
-                <button [disabled]="loginForm.invalid" class="btn-flat cyan lighten-3">Entar</button>
+                <button  class="btn-flat cyan lighten-3">Entar</button>
             </div>
             <div class="col s12">Not a User? <a [routerLink]="['signup']">Register Now</a></div>
         </div>

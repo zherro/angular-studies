@@ -30,20 +30,22 @@ export class SiginComponent implements OnInit {
   }
 
   login(){
-    const userName = this.loginForm.get('userName').value;
-    const password = this.loginForm.get('password').value;
+    if(this.loginForm.invalid) {
+      const userName = this.loginForm.get('userName').value;
+      const password = this.loginForm.get('password').value;
 
-    this.authService
-    .authenticate(userName, password)
-    .subscribe(
-      () => this.router.navigate(['user', userName]),
-      err => {        
-        this.loginForm.reset();
-        console.table(err);
-        this.detectPlataform.isPlatformBrowser() && 
-          this.userNameImput.nativeElement.focus();
-      }
-    );
+      this.authService
+      .authenticate(userName, password)
+      .subscribe(
+        () => this.router.navigate(['user', userName]),
+        err => {        
+          this.loginForm.reset();
+          console.table(err);
+          this.detectPlataform.isPlatformBrowser() && 
+            this.userNameImput.nativeElement.focus();
+        }
+      );
+    }
   }
 
 }
