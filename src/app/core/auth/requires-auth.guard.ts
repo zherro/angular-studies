@@ -13,7 +13,13 @@ export class RequiresAuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if(!this.userSevice.isLogged()){
-            this.router.navigate([''])
+            this.router.navigate(['home'],
+                {  
+                    queryParams: {
+                        fromUrl: state.url // .charAt(0) == '/' ? state.url.substring(1, state.url.length) : state.url
+                    }
+                } 
+            );
             return false;
         }
         return true;

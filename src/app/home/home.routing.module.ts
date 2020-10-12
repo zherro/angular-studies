@@ -9,8 +9,7 @@ import { SignupComponent } from './signup/signup.component';
 const routes = [ 
   {  
     path: '', 
-    component: HomeComponent, 
-    canActivate: [AuthGuard],
+    component: HomeComponent,
     children: [
       { path: '', component: SiginComponent, data: {title: 'Sign'} },
       { path: 'signup', component: SignupComponent , data: {title: 'SignUp'}},

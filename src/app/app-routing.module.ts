@@ -23,7 +23,7 @@ const routes = [
    loadChildren: './home/home.module#HomeModule' 
   },
   {
-    path: 'user/:userName', component: PhotoListComponent,
+    path: 'user/:userName', component: PhotoListComponent,     
     resolve: {
       photos: PhotoListResolver
     },
